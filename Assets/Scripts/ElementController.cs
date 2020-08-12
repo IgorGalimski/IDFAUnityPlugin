@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace
+namespace UDFAUnityPlugin
 {
     public class ElementController : MonoBehaviour
     {
@@ -24,11 +24,8 @@ namespace DefaultNamespace
         {
             AdvertisingIdentifierController.ATTrackingManagerAuthorizationStatusEvent += OnATTrackingManagerAuthorizationStatusHandler;
             
-            _IDFA.text = AdvertisingIdentifierController.GetIDFA();
-
-            _authorizationStatus.text += AdvertisingIdentifierController.GetAuthorizationStatus(); 
-            
-            _isNeedToRequestIDFA.text += AdvertisingIdentifierController.IsNeedToRequestIDFA();
+            UpdateIDFA();
+            UpdateStatuses();
 
             _requestIDFA.onClick.AddListener(OnRequestAuthorizationHandler);
         }
@@ -45,7 +42,21 @@ namespace DefaultNamespace
         
         private void OnATTrackingManagerAuthorizationStatusHandler(ATTrackingManagerAuthorizationStatus status)
         {
+            UpdateIDFA();
+            
             _updatedAuthorizationStatus.text += status;
+        }
+
+        private void UpdateIDFA()
+        {
+            _IDFA.text = AdvertisingIdentifierController.GetIDFA();
+        }
+
+        private void UpdateStatuses()
+        {
+            _authorizationStatus.text += AdvertisingIdentifierController.GetAuthorizationStatus(); 
+            
+            _isNeedToRequestIDFA.text += AdvertisingIdentifierController.IsNeedToRequestIDFA();
         }
     }
 }

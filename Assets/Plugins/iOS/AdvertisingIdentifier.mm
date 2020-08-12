@@ -1,6 +1,6 @@
 //
 //  AdvertisingIdentifier.m
-//  Test
+//  IDFAUnityPlugin
 //
 //  Created by Igor Galimski on 8/12/20.
 //
@@ -51,13 +51,10 @@ extern "C"
     API_AVAILABLE(ios(14))
     void RequestAuthorizationInternal(ATTrackingManagerAuthorizationStatusCallback callback)
     {
-        if (@available(iOS 14, *))
+        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status)
         {
-            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status)
-            {
-                callback(status);
-            }];
-        }
+            callback(status);
+        }];
     }
 }
 

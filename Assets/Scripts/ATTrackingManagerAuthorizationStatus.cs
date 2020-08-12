@@ -1,4 +1,4 @@
-namespace DefaultNamespace
+namespace UDFAUnityPlugin
 {
     public enum ATTrackingManagerAuthorizationStatus
     {
