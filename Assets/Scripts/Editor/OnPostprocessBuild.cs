@@ -7,6 +7,8 @@ using UnityEditor.iOS.Xcode;
 
 public class OnPostprocessBuild
 {
+    public const string USER_TRACK_USAGE_DESCRIPTION = "App would like to access IDFA for tracking purpose";
+    
     [PostProcessBuild]
     public static void OnPostprocessBuildHandler(BuildTarget buildTarget, string path)
     {
@@ -26,7 +28,7 @@ public class OnPostprocessBuild
 
         var rootDict = plist.root;
         
-        rootDict.SetString("NSUserTrackingUsageDescription","App would like to access IDFA for tracking purpose");
+        rootDict.SetString("NSUserTrackingUsageDescription", USER_TRACK_USAGE_DESCRIPTION);
    
         File.WriteAllText(plistPath, plist.WriteToString());
         File.WriteAllText (projPath, proj.WriteToString ());
