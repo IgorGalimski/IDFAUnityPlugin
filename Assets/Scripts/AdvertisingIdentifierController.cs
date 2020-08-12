@@ -13,6 +13,9 @@ public class AdvertisingIdentifierController
     
     [DllImport("__Internal")]
     private static extern ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal();
+    
+    [DllImport("__Internal")]
+    private static extern void RequestAuthorizationInternal();
 
     public static bool IsNeedToRequestIDFA()
     {
@@ -54,5 +57,17 @@ public class AdvertisingIdentifierController
         }
 
         return ATTrackingManagerAuthorizationStatus.ATTrackingManagerAuthorizationStatusDenied;
+    }
+    
+    public static void RequestAuthorization()
+    {
+        try
+        {
+            RequestAuthorizationInternal();
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("RequestAuthorizationInternal error: " + exception.Message);
+        }
     }
 }

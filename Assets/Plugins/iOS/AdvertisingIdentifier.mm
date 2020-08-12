@@ -43,5 +43,16 @@ extern "C"
     {
         return [ATTrackingManager trackingAuthorizationStatus];
     }
+
+    void RequestAuthorizationInternal()
+    {
+        if (@available(iOS 14, *))
+        {
+            [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status)
+            {
+    
+            }];
+        }
+    }
 }
 

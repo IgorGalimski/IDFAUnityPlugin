@@ -24,19 +24,19 @@ namespace DefaultNamespace
             
             _isNeedToRequestIDFA.text = "IsNeedToRequestIDFA:" + AdvertisingIdentifierController.IsNeedToRequestIDFA();
 
-            _IDFA.text = AdvertisingIdentifierController.GetIDFA().ToString();
+            _IDFA.text = AdvertisingIdentifierController.GetIDFA();
             
-            _requestIDFA.onClick.AddListener(OnRequestIDFA);
+            _requestIDFA.onClick.AddListener(OnRequestAuthorizationHandler);
         }
 
         public void OnDestroy()
         {
-            _requestIDFA.onClick.RemoveListener(OnRequestIDFA);
+            _requestIDFA.onClick.RemoveListener(OnRequestAuthorizationHandler);
         }
 
-        private void OnRequestIDFA()
+        private void OnRequestAuthorizationHandler()
         {
-            
+            AdvertisingIdentifierController.RequestAuthorization();
         }
     }
 }
