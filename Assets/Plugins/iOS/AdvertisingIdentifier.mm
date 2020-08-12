@@ -6,6 +6,7 @@
 //
 
 #import <AdSupport/ASIdentifierManager.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 char* cStringCopy(const char* string)
 {
@@ -22,15 +23,15 @@ extern "C"
 {
     char* GetIDFA()
     {
-      if([[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled])
-      {
-          NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
-          NSString *idfaString = [IDFA UUIDString];
-
-          return cStringCopy([idfaString UTF8String]);
-      }
+        NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
+        NSString *idfaString = [IDFA UUIDString];
         
-      return NULL;
+        return cStringCopy([idfaString UTF8String]);
+    }
+
+    ATTrackingManagerAuthorizationStatus GetAuthorizationStatus()
+    {
+        return [ATTrackingManager trackingAuthorizationStatus];
     }
 }
 
