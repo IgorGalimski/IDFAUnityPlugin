@@ -39,7 +39,7 @@ extern "C"
         return cStringCopy([idfaString UTF8String]);
     }
 
-    ATTrackingManagerAuthorizationStatus GetAuthorizationStatus()
+    ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal()
     {
         return [ATTrackingManager trackingAuthorizationStatus];
     }

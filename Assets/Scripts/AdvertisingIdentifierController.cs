@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using DefaultNamespace;
 using UnityEngine;
 
 public class AdvertisingIdentifierController
@@ -8,13 +9,16 @@ public class AdvertisingIdentifierController
     private static extern bool IsNeedToRequestIDFAInternal();
     
     [DllImport("__Internal")]
-    private static extern bool GetIDFAInternal();
+    private static extern string GetIDFAInternal();
+    
+    [DllImport("__Internal")]
+    private static extern ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal();
 
     public static bool IsNeedToRequestIDFA()
     {
         try
         {
-            return GetIDFAInternal();
+            return IsNeedToRequestIDFAInternal();
         }
         catch (Exception exception)
         {
@@ -24,7 +28,7 @@ public class AdvertisingIdentifierController
         return false;
     }
     
-    public static bool GetIDFA()
+    public static string GetIDFA()
     {
         try
         {
@@ -35,6 +39,20 @@ public class AdvertisingIdentifierController
             Debug.LogError("GetIDFA error: " + exception.Message);
         }
 
-        return false;
+        return string.Empty;
+    }
+    
+    public static ATTrackingManagerAuthorizationStatus GetAuthorizationStatus()
+    {
+        try
+        {
+            return GetAuthorizationStatusInternal();
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("GetAuthorizationStatusInternal error: " + exception.Message);
+        }
+
+        return ATTrackingManagerAuthorizationStatus.ATTrackingManagerAuthorizationStatusDenied;
     }
 }
