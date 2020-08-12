@@ -22,6 +22,8 @@ namespace DefaultNamespace
 
         public void OnEnable()
         {
+            AdvertisingIdentifierController.ATTrackingManagerAuthorizationStatusEvent += OnATTrackingManagerAuthorizationStatusHandler;
+            
             _IDFA.text = AdvertisingIdentifierController.GetIDFA();
 
             _authorizationStatus.text += AdvertisingIdentifierController.GetAuthorizationStatus(); 
@@ -38,10 +40,10 @@ namespace DefaultNamespace
 
         private void OnRequestAuthorizationHandler()
         {
-            AdvertisingIdentifierController.RequestAuthorization(RequestAuthorizationHandler);
+            AdvertisingIdentifierController.RequestAuthorization();
         }
-
-        private void RequestAuthorizationHandler(ATTrackingManagerAuthorizationStatus status)
+        
+        private void OnATTrackingManagerAuthorizationStatusHandler(ATTrackingManagerAuthorizationStatus status)
         {
             _updatedAuthorizationStatus.text += status;
         }

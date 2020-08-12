@@ -20,7 +20,7 @@ public class AdvertisingIdentifierController
     
     private delegate void AuthorizationStatusCallbackDelegate(ATTrackingManagerAuthorizationStatus status);
 
-    private static event Action<ATTrackingManagerAuthorizationStatus> ATTrackingManagerAuthorizationStatusEvent =
+    public static event Action<ATTrackingManagerAuthorizationStatus> ATTrackingManagerAuthorizationStatusEvent =
         status => { };
 
     public static bool IsNeedToRequestIDFA()
@@ -65,21 +65,15 @@ public class AdvertisingIdentifierController
         return ATTrackingManagerAuthorizationStatus.ATTrackingManagerAuthorizationStatusDenied;
     }
     
-    public static void RequestAuthorization(Action<ATTrackingManagerAuthorizationStatus> callback)
+    public static void RequestAuthorization()
     {
         try
         {
-            ATTrackingManagerAuthorizationStatusEvent += callback;
-            
             RequestAuthorizationInternal(RequestAuthorizationCallback);
         }
         catch (Exception exception)
         {
             Debug.LogError("RequestAuthorizationInternal error: " + exception.Message);
-        }
-        finally
-        {
-            ATTrackingManagerAuthorizationStatusEvent -= callback;
         }
     }
 
