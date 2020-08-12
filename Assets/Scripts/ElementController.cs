@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,12 @@ namespace DefaultNamespace
 
         private void OnRequestAuthorizationHandler()
         {
-            AdvertisingIdentifierController.RequestAuthorization();
+            AdvertisingIdentifierController.RequestAuthorization(RequestAuthorizationHandler);
+        }
+
+        private void RequestAuthorizationHandler(ATTrackingManagerAuthorizationStatus status)
+        {
+            _authorizationStatus.text = "Updated: " + status;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using AOT;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -15,7 +16,12 @@ public class AdvertisingIdentifierController
     private static extern ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal();
     
     [DllImport("__Internal")]
-    private static extern void RequestAuthorizationInternal();
+    private static extern void RequestAuthorizationInternal(AuthorizationStatusCallbackDelegate callback);
+    
+    private delegate void AuthorizationStatusCallbackDelegate(ATTrackingManagerAuthorizationStatus status);
+
+    private static event Action<ATTrackingManagerAuthorizationStatus> ATTrackingManagerAuthorizationStatusEvent =
+        status => { };
 
     public static bool IsNeedToRequestIDFA()
     {
@@ -59,15 +65,27 @@ public class AdvertisingIdentifierController
         return ATTrackingManagerAuthorizationStatus.ATTrackingManagerAuthorizationStatusDenied;
     }
     
-    public static void RequestAuthorization()
+    public static void RequestAuthorization(Action<ATTrackingManagerAuthorizationStatus> callback)
     {
         try
         {
-            RequestAuthorizationInternal();
+            ATTrackingManagerAuthorizationStatusEvent += callback;
+            
+            RequestAuthorizationInternal(RequestAuthorizationCallback);
         }
         catch (Exception exception)
         {
             Debug.LogError("RequestAuthorizationInternal error: " + exception.Message);
         }
+        finally
+        {
+            ATTrackingManagerAuthorizationStatusEvent -= callback;
+        }
+    }
+
+    [MonoPInvokeCallback(typeof(AuthorizationStatusCallbackDelegate))]
+    private static void RequestAuthorizationCallback(ATTrackingManagerAuthorizationStatus status)
+    {
+        ATTrackingManagerAuthorizationStatusEvent(status);
     }
 }
