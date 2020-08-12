@@ -6,25 +6,28 @@ namespace DefaultNamespace
     public class ElementController : MonoBehaviour
     {
         [SerializeField] 
+        private Text _IDFA;
+        
+        [SerializeField] 
         private Text _authorizationStatus;
         
         [SerializeField] 
-        private Text _isNeedToRequestIDFA;
-
+        private Text _updatedAuthorizationStatus;
+        
         [SerializeField] 
-        private Text _IDFA;
+        private Text _isNeedToRequestIDFA;
 
         [SerializeField] 
         private Button _requestIDFA;
 
         public void OnEnable()
         {
-            _authorizationStatus.text = "Status: " + AdvertisingIdentifierController.GetAuthorizationStatus(); 
-            
-            _isNeedToRequestIDFA.text = "IsNeedToRequestIDFA:" + AdvertisingIdentifierController.IsNeedToRequestIDFA();
-
             _IDFA.text = AdvertisingIdentifierController.GetIDFA();
+
+            _authorizationStatus.text += AdvertisingIdentifierController.GetAuthorizationStatus(); 
             
+            _isNeedToRequestIDFA.text += AdvertisingIdentifierController.IsNeedToRequestIDFA();
+
             _requestIDFA.onClick.AddListener(OnRequestAuthorizationHandler);
         }
 
@@ -40,7 +43,7 @@ namespace DefaultNamespace
 
         private void RequestAuthorizationHandler(ATTrackingManagerAuthorizationStatus status)
         {
-            _authorizationStatus.text = "Updated: " + status;
+            _updatedAuthorizationStatus.text += status;
         }
     }
 }

@@ -21,6 +21,7 @@ char* cStringCopy(const char* string)
 
 extern "C"
 {
+    API_AVAILABLE(ios(14))
     typedef void (*ATTrackingManagerAuthorizationStatusCallback)(ATTrackingManagerAuthorizationStatus status);
 
     bool IsNeedToRequestIDFAInternal()
@@ -41,11 +42,13 @@ extern "C"
         return cStringCopy([idfaString UTF8String]);
     }
 
+    API_AVAILABLE(ios(14))
     ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal()
     {
         return [ATTrackingManager trackingAuthorizationStatus];
     }
 
+    API_AVAILABLE(ios(14))
     void RequestAuthorizationInternal(ATTrackingManagerAuthorizationStatusCallback callback)
     {
         if (@available(iOS 14, *))
