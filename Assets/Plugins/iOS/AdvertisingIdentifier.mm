@@ -21,7 +21,7 @@ char* cStringCopy(const char* string)
 
 extern "C"
 {
-    bool NeedToRequestIDFA()
+    bool IsNeedToRequestIDFAInternal()
     {
         if(@available(iOS 14, *))
         {
@@ -31,7 +31,7 @@ extern "C"
         return false;
     }
 
-    char* GetIDFA()
+    char* GetIDFAInternal()
     {
         NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
         NSString *idfaString = [IDFA UUIDString];
