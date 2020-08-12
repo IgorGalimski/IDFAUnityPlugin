@@ -7,7 +7,7 @@ using UnityEditor.iOS.Xcode;
 
 public class OnPostprocessBuild
 {
-    public const string USER_TRACK_USAGE_DESCRIPTION = "App would like to access IDFA for tracking purpose";
+    private const string USER_TRACK_USAGE_DESCRIPTION = "App would like to access IDFA for tracking purpose";
     
     [PostProcessBuild]
     public static void OnPostprocessBuildHandler(BuildTarget buildTarget, string path)

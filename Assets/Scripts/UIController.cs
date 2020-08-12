@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UDFAUnityPlugin
 {
-    public class ElementController : MonoBehaviour
+    public class UIController : MonoBehaviour
     {
         [SerializeField] 
         private Text _IDFA;
