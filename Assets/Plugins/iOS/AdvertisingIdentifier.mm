@@ -21,6 +21,16 @@ char* cStringCopy(const char* string)
 
 extern "C"
 {
+    bool NeedToRequestIDFA()
+    {
+        if(@available(iOS 14, *))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
     char* GetIDFA()
     {
         NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
