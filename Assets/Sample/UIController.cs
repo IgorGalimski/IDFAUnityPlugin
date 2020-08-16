@@ -34,6 +34,8 @@ namespace UDFAUnityPlugin.Sample
 
         public void OnDestroy()
         {
+            AdvertisingIdentifierController.ATTrackingManagerAuthorizationStatusEvent -= OnATTrackingManagerAuthorizationStatusHandler;
+            
             _requestIDFA.onClick.RemoveListener(OnRequestAuthorizationHandler);
         }
 
