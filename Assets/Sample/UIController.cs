@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UDFAUnityPlugin
+namespace UDFAUnityPlugin.Sample
 {
     public class UIController : MonoBehaviour
     {
