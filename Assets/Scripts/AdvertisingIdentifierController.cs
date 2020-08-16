@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_IOS
+
+using System;
 using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
@@ -85,3 +87,5 @@ namespace UDFAUnityPlugin
         }
     }
 }
+
+#endif

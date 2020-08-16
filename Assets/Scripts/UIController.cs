@@ -1,3 +1,5 @@
+#if UNITY_IOS
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,3 +62,5 @@ namespace UDFAUnityPlugin
         }
     }
 }
+
+#endif
