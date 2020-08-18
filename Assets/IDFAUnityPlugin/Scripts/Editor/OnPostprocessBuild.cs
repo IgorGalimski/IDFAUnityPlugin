@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.iOS.Xcode;
 
-namespace IDFAUnityPluguin.Editor
+namespace IDFAUnityPlugin.Editor
 {
     public class OnPostprocessBuild
     {

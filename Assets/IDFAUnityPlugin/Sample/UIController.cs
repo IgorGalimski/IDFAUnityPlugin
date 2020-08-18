@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using IDFAUnityPlugin;
 
 namespace IDFAUnityPlugin.Sample
 {
@@ -20,7 +19,8 @@ namespace IDFAUnityPlugin.Sample
 
         [SerializeField] 
         private Button _requestIDFA;
-#if UNITY_IOS
+
+#if UNITY_IOS 
         public void OnEnable()
         {
             AdvertisingIdentifierController.ATTrackingManagerAuthorizationStatusEvent += OnATTrackingManagerAuthorizationStatusHandler;
@@ -61,6 +61,6 @@ namespace IDFAUnityPlugin.Sample
             
             _isNeedToRequestIDFA.text += AdvertisingIdentifierController.IsNeedToRequestIDFA();
         }
-    }
 #endif
+    }
 }

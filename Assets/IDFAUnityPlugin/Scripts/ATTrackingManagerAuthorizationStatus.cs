@@ -1,6 +1,6 @@
 #if UNITY_IOS
 
-namespace UDFAUnityPlugin
+namespace IDFAUnityPlugin
 {
     public enum ATTrackingManagerAuthorizationStatus
     {

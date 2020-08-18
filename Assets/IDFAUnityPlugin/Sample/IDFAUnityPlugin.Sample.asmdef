@@ -4,9 +4,7 @@
         "IDFAUnityPlugin"
     ],
     "optionalUnityReferences": [],
-    "includePlatforms": [
-        "iOS"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
 
-namespace UDFAUnityPlugin
+namespace IDFAUnityPlugin
 {
     public class AdvertisingIdentifierController
     {
