@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using IDFAUnityPlugin;
 
-namespace UDFAUnityPlugin.Sample
+namespace IDFAUnityPlugin.Sample
 {
     public class UIController : MonoBehaviour
     {
