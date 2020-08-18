@@ -1,0 +1,14 @@
+{
+    "name": "IDFAUnityPlugin",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
