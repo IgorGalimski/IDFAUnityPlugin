@@ -1,4 +1,4 @@
-User Xcode 12+
+Use Xcode 12+
 
 1. Before build - Go to Scripts/Editor/OnPostprocessBuild and replace USER_TRACK_USAGE_DESCRIPTION to your description
 2. To request IDFA
