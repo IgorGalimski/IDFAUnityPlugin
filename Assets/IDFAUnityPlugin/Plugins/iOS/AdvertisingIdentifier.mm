@@ -53,7 +53,10 @@ extern "C"
     {
         [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status)
         {
-            callback(status);
+            dispatch_async(dispatch_get_main_queue(), ^ 
+            {
+                callback (status);
+            }
         }];
     }
 }
