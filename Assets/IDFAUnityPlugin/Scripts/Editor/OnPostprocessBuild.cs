@@ -18,8 +18,12 @@ namespace IDFAUnityPlugin.Editor
    
             var proj = new PBXProject ();
             proj.ReadFromString (File.ReadAllText (projPath));
-   
+
+#if UNITY_2019_3_OR_NEWER
+            var target = proj.GetUnityMainTargetGuid();
+#else
             var target = proj.TargetGuidByName ("Unity-iPhone");
+#endif
 
             proj.AddFrameworkToProject(target, "AdSupport.framework", true);
             proj.AddFrameworkToProject(target, "AppTrackingTransparency.framework", true);
