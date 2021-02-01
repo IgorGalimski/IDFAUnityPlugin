@@ -5,59 +5,29 @@
 //  Created by Igor Galimski on 8/12/20.
 //
 
+#import "TrackingManager.h"
 #import <AdSupport/ASIdentifierManager.h>
 #import <AppTrackingTransparency/AppTrackingTransparency.h>
 
-char* cStringCopy(const char* string)
+extern bool IsNeedToRequestIDFAInternal()
 {
-    if (string == NULL)
-        return NULL;
-
-    char* res = (char*)malloc(strlen(string) + 1);
-    strcpy(res, string);
-
-    return res;
+    return [[TrackingManager sharedInstance] IsNeedToRequestIDFA];
 }
 
-extern "C"
+extern char* GetIDFAInternal()
 {
-    API_AVAILABLE(ios(14))
-    typedef void (*ATTrackingManagerAuthorizationStatusCallback)(ATTrackingManagerAuthorizationStatus status);
+    return [[TrackingManager sharedInstance] GetIDFA];
+}
 
-    bool IsNeedToRequestIDFAInternal()
-    {
-        if(@available(iOS 14, *))
-        {
-            return true;
-        }
-        
-        return false;
-    }
+API_AVAILABLE(ios(14))
+extern ATTrackingManagerAuthorizationStatus* GetAuthorizationStatusInternal()
+{
+    return [[TrackingManager sharedInstance] GetAuthorizationStatus];
+}
 
-    char* GetIDFAInternal()
-    {
-        NSUUID *IDFA = [[ASIdentifierManager sharedManager] advertisingIdentifier];
-        NSString *idfaString = [IDFA UUIDString];
-        
-        return cStringCopy([idfaString UTF8String]);
-    }
-
-    API_AVAILABLE(ios(14))
-    ATTrackingManagerAuthorizationStatus GetAuthorizationStatusInternal()
-    {
-        return [ATTrackingManager trackingAuthorizationStatus];
-    }
-
-    API_AVAILABLE(ios(14))
-    void RequestAuthorizationInternal(ATTrackingManagerAuthorizationStatusCallback callback)
-    {
-        [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status)
-        {
-            dispatch_async(dispatch_get_main_queue(), ^ 
-            {
-                callback (status);
-            });
-        }];
-    }
+API_AVAILABLE(ios(14))
+extern void RequestAuthorizationInternal(ATTrackingManagerAuthorizationStatusCallback callback)
+{
+    return [[TrackingManager sharedInstance] RequestAuthorization:callback];
 }
 
