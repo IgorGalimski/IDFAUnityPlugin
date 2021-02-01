@@ -20,7 +20,7 @@ namespace IDFAUnityPlugin.Editor
             proj.ReadFromString (File.ReadAllText (projPath));
 
 #if UNITY_2019_3_OR_NEWER
-            var target = proj.GetUnityMainTargetGuid();
+            var target = proj.GetUnityFrameworkTargetGuid();
 #else
             var target = proj.TargetGuidByName ("Unity-iPhone");
 #endif
